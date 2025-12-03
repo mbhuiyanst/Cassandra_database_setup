@@ -72,21 +72,28 @@ Cluster Architecture (3 Nodes):
 Step 1: Prerequisites on all 3 nodes based on ubuntu 24 : Install openjdk  and cassandra
 <!-- space -->
 sudo apt install openjdk-17-jre-headless -y
+<!-- space -->
 sudo apt install cassandra -y
 <!-- space -->
 Step 2:  Check that cqlsh is working on all nodes
+<!-- space -->
 type cqlsh and press enter
 <!-- space -->
 step 3: Now edit the configuration and to do this, Stop the cassandra service on all 3 nodes.
+<!-- space -->
 sudo systemctl stop cassandra
 <!-- space -->
 step 4: Edit /etc/hosts on ALL nodes
+<!-- space -->
 sudo nano /etc/hosts
 <!-- space -->
 Add these lines but edit accordingly your own ip and name
+<!-- space -->
 
 192.168.178.63  cassandra1
+<!-- space -->
 192.168.178.65  cassandra2
+<!-- space -->
 192.168.178.67  cassandra3
 <!-- space -->
 save and exit
@@ -105,13 +112,20 @@ Node1:
 cluster_name: 'mycluster'
 <!-- space -->
 num_tokens: 256
+<!-- space -->
 listen_address: 192.168.178.63
+<!-- space -->
 rpc_address: 0.0.0.0
+<!-- space -->
 rpc_broadcast_address: 192.168.178.63
 <!-- space -->
+<!-- space -->
 seed_provider:
+<!-- space -->
     - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+    <!-- space -->
       parameters:
+      <!-- space -->
           - seeds: "192.168.178.63,192.168.178.65,192.168.178.67"
 <!-- space -->
 endpoint_snitch: GossipingPropertyFileSnitch
@@ -126,12 +140,18 @@ num_tokens: 256
 listen_address: 192.168.178.65
 <!-- space -->
 rpc_address: 0.0.0.0
+<!-- space -->
 rpc_broadcast_address: 192.168.178.65
+<!-- space -->
 
 seed_provider:
+<!-- space -->
     - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+    <!-- space -->
       parameters:
+      <!-- space -->
           - seeds: "192.168.178.63,192.168.178.65,192.168.178.67"
+          <!-- space -->
 
 endpoint_snitch: GossipingPropertyFileSnitch
 
@@ -139,54 +159,77 @@ endpoint_snitch: GossipingPropertyFileSnitch
 
 Node 3:
 cluster_name: 'mycluster'
-
+<!-- space -->
 num_tokens: 256
-listen_address: 192.168.178.637
+<!-- space -->
+listen_address: 192.168.178.67
+<!-- space -->
 rpc_address: 0.0.0.0
+<!-- space -->
 rpc_broadcast_address: 192.168.178.67
+<!-- space -->
 
 seed_provider:
+<!-- space -->
     - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+    <!-- space -->
       parameters:
+      <!-- space -->
           - seeds: "192.168.178.63,192.168.178.65,192.168.178.67"
+          <!-- space -->
 
 endpoint_snitch: GossipingPropertyFileSnitch
 
 <!-- space -->
 step 6: Update rack/datacenter info (ALL nodes)
-
+<!-- space -->
 sudo nano /etc/cassandra/cassandra-rackdc.properties
+<!-- space -->
 
 For node 1 and 2:
+<!-- space -->
 dc=dc1-riad
+<!-- space -->
 rack=rack1
 
+<!-- space -->
 For node 3:
+<!-- space -->
 dc=dc1-riad
+<!-- space -->
 rack=rack2
 <!-- space -->
 
 Step 7: Allow ports in firewall (if enabled)
 
 sudo ufw allow 7000/tcp
+<!-- space -->
 sudo ufw allow 7001/tcp
+<!-- space -->
 sudo ufw allow 7199/tcp
+<!-- space -->
 sudo ufw allow 9042/tcp
+<!-- space -->
 sudo ufw allow 9160/tcp
 <!-- space -->
 
 step 8: Start the cluster
-
+<!-- space -->
 start  node 1 first
+<!-- space -->
 sudo systemctl start cassandra
-
+<!-- space -->
 wait few seconds
+<!-- space -->
 Then start node2:sudo systemctl start cassandra
+<!-- space -->
 Then start node3:sudo systemctl start cassandra
 <!-- space -->
 
 step 9:  Verify cluster status
+<!-- space -->
 nodetool status
+<!-- space -->
 or if its showing authentication is required
 <!-- space -->
 
@@ -228,7 +271,7 @@ cqlsh> CREATE TABLE test.items (id int PRIMARY KEY, value text);
 Step 13: Insert data into table
 cqlsh> INSERT INTO test.items (id, value) VALUES (1, 'hello');
 
-
+<!-- space -->
 qlsh> use testks;
 cqlsh:testks> SELECT * FROM test.items;
 
