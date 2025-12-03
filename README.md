@@ -121,11 +121,11 @@ rpc_broadcast_address: 192.168.178.63
 <!-- space -->
 <!-- space -->
 seed_provider:
-               <!-- space -->
+    <!-- space -->
     - class_name: org.apache.cassandra.locator.SimpleSeedProvider
-              <!-- space -->
+    <!-- space -->
       parameters:
-              <!-- space -->
+     <!-- space -->
           - seeds: "192.168.178.63,192.168.178.65,192.168.178.67"
 <!-- space -->
 endpoint_snitch: GossipingPropertyFileSnitch
