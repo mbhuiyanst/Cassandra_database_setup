@@ -241,6 +241,7 @@ Datacenter: dc1-riad
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
 --  Address         Load        Tokens  Owns (effective)  Host ID                               Rack 
+<!-- space -->
 UN  192.168.178.63  113.82 KiB  256     100.0%            581790c7-615f-4b09-b337-36401f90c8df  rack1
 <!-- space -->
 UN  192.168.178.65  151.38 KiB  256     100.0%            e8377d23-e912-4e38-b6f1-927fa3ec3133  rack1
