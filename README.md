@@ -16,42 +16,43 @@ Key Features:
 
 Masterless Architecture: Each node is equal; no master or coordinator bottleneck.
 
-
+<!-- space -->
 High Availability: Data is replicated across multiple nodes and datacenters.
-
+<!-- space -->
 
 Fault Tolerant: Automatically handles node failures without downtime.
 
-
+<!-- space -->
 Horizontal Scalability: Add or remove nodes without interrupting operations.
 
-
+<!-- space -->
 Tunable Consistency: Choose consistency levels per query (ONE, QUORUM, ALL).
-
+<!-- space -->
 
 Efficient for Write-Heavy Workloads: Designed for high-speed, low-latency writes.
-
+<!-- space -->
 
 Supports Multi-Datacenter Clusters: Rack and Data Centre-aware replication.
 
 <!-- space -->
 
 Common Use Cases:
+<!-- space -->
 Time-series data
-
+<!-- space -->
 
 IoT platforms
-
+<!-- space -->
 
 Logging and monitoring systems
-
+<!-- space -->
 
 Large-scale web applications
-
+<!-- space -->
 
 Analytics pipelines
 
-
+<!-- space -->
 Messaging platforms
 
 <!-- space -->
@@ -61,15 +62,15 @@ Top 10 Companies Using Apache Cassandra:
 
 Netflix,Apple,Uber,Meta,Spotify,Twitter,GitHub,eBay,American Express,Alibaba
 
-
+<!-- space -->
 
 Cluster Architecture (3 Nodes):
-
+<!-- space -->
 <img width="731" height="245" alt="image" src="https://github.com/user-attachments/assets/537c62dd-b48c-469d-9751-6f9a8d323b1c" />
 
 <!-- space -->
 Step 1: Prerequisites on all 3 nodes based on ubuntu 24 : Install openjdk  and cassandra
-
+<!-- space -->
 sudo apt install openjdk-17-jre-headless -y
 sudo apt install cassandra -y
 <!-- space -->
@@ -87,42 +88,43 @@ Add these lines but edit accordingly your own ip and name
 192.168.178.63  cassandra1
 192.168.178.65  cassandra2
 192.168.178.67  cassandra3
-
+<!-- space -->
 save and exit
 
 <!-- space -->
 
 step 5: Update cassandra.yaml on each node:
-
+<!-- space -->
 sudo nano /etc/cassandra/cassandra.yaml
-
+<!-- space -->
 Change these values for each node:
 
 <!-- space -->
 Node1: 
 
 cluster_name: 'mycluster'
-
+<!-- space -->
 num_tokens: 256
 listen_address: 192.168.178.63
 rpc_address: 0.0.0.0
 rpc_broadcast_address: 192.168.178.63
-
+<!-- space -->
 seed_provider:
     - class_name: org.apache.cassandra.locator.SimpleSeedProvider
       parameters:
           - seeds: "192.168.178.63,192.168.178.65,192.168.178.67"
-
+<!-- space -->
 endpoint_snitch: GossipingPropertyFileSnitch
 <!-- space -->
 
 
 Node2:
-
+<!-- space -->
 cluster_name: 'mycluster'
-
+<!-- space -->
 num_tokens: 256
 listen_address: 192.168.178.65
+<!-- space -->
 rpc_address: 0.0.0.0
 rpc_broadcast_address: 192.168.178.65
 
@@ -197,7 +199,9 @@ Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
 --  Address         Load        Tokens  Owns (effective)  Host ID                               Rack 
 UN  192.168.178.63  113.82 KiB  256     100.0%            581790c7-615f-4b09-b337-36401f90c8df  rack1
+<!-- space -->
 UN  192.168.178.65  151.38 KiB  256     100.0%            e8377d23-e912-4e38-b6f1-927fa3ec3133  rack1
+<!-- space -->
 UN  192.168.178.67  79.71 KiB   256     100.0%            e226588f-75af-4069-bd73-359877e7af63  rack2
 
 <!-- space -->
@@ -233,19 +237,28 @@ cqlsh:testks> SELECT * FROM test.items;
   1 | hello
 
 cqlsh:testks> INSERT INTO test.items (id, value) VALUES (2, 'hello1290345');
+<!-- space -->
 cqlsh:testks> INSERT INTO test.items (id, value) VALUES (3, 'hello12458345');
+<!-- space -->
 cqlsh:testks> INSERT INTO test.items (id, value) VALUES (4, 'hello123465');
+<!-- space -->
 cqlsh:testks> INSERT INTO test.items (id, value) VALUES (5, 'hello1234665');
+<!-- space -->
 cqlsh:testks> ELECT * FROM test.items
 
 <!-- space -->
 
  id | value
+ <!-- space -->
 ----+---------------
   5 |  hello1234665
+  <!-- space -->
   1 |         hello
+  <!-- space -->
   2 |  hello1290345
+  <!-- space -->
   4 |   hello123465
+  <!-- space -->
   3 | hello12458345
 
 
@@ -255,10 +268,13 @@ Here I create keyspace, table and insert data on node 1 but you can see those da
 
 mrhbhiyan@ubuntu2:~/Desktop$ cqlsh 
 /usr/bin/cqlsh.py:477: DeprecationWarning: Legacy execution parameters will be removed in 4.0. Consider using execution profiles.
+<!-- space -->
 /usr/bin/cqlsh.py:507: DeprecationWarning: Setting the consistency level at the session level will be removed in 4.0. Consider using execution profiles and setting the desired consistency level to the EXEC_PROFILE_DEFAULT profile.
+<!-- space -->
 Connected to mycluster at 127.0.0.1:9042
 [cqlsh 6.1.0 | Cassandra 4.1.10 | CQL spec 3.4.6 | Native protocol v5]
 Use HELP for help.
+<!-- space -->
 cqlsh> SELECT * FROM test.items;
 
  id | value
@@ -273,11 +289,16 @@ cqlsh> SELECT * FROM test.items;
 cqlsh> SELECT * FROM test.items;
 
  id | value
+ <!-- space -->
 ----+---------------
   5 |  hello1234665
+  <!-- space -->
   1 |         hello
+  <!-- space -->
   2 |  hello1290345
+  <!-- space -->
   4 |   hello123465
+  <!-- space -->
   3 | hello12458345
 
 
